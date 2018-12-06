@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import PokeCard from './PokeCard';
+import CardWrapper from './CardWrapper';
+// import CardWrapper from './CardWrapper';
 
 const PokeList = ({pokemons}) => {
   return (
     <Fragment>
       {
         pokemons.map(pokemon =>(
-          <PokeCard 
+          <CardWrapper 
             key={pokemon.id}
             pokemon={pokemon}
           />
@@ -15,7 +16,6 @@ const PokeList = ({pokemons}) => {
       }
     </Fragment>
   );
-
 };
 
 const mapStateToProps = ({ pokemons: { pokemon } }) => {

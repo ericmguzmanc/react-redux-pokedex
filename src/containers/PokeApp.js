@@ -1,9 +1,7 @@
-import React, { PureComponent, Suspense} from 'react';
+import React, { PureComponent} from 'react';
 import { connect } from 'react-redux';
 import { fetchPokemon } from '../store/actions/actions';
-import Loading from '../components/Loading';
-// import PokeList from '../components/PokeList';
-const PokeList = React.lazy(() => import('../components/PokeList'));
+import PokeRouter from './PokeRouting';
 
 class PokeApp extends PureComponent {
 
@@ -11,20 +9,12 @@ class PokeApp extends PureComponent {
     this.props.fetchPokemon();
   }
 
-  
-
   render() {
-
-    const { isFetching } = this.props;
-    console.log(`isFetching: ${isFetching}`);
-
     return(
       <div className="content">
         <div className="container text-center" style={{margin: 'auto'}}>
           <div style={{'marginTop': '25px'}}>
-            <Suspense fallback={<Loading />}>
-              <PokeList />
-            </Suspense>
+            <PokeRouter />
           </div>
         </div>
       </div>
@@ -32,10 +22,4 @@ class PokeApp extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ pokemons }) => {
-  return {
-    isFetching: pokemons.isFetching
-  }
-}
-
-export default connect(mapStateToProps, { fetchPokemon })(PokeApp);
+export default connect(null, { fetchPokemon })(PokeApp);

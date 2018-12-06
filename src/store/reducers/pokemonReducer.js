@@ -1,13 +1,12 @@
 import { 
-  SELECT_POKEMON,
-  REQUEST_POKEMONS,
-  RECEIVE_POKEMONS
+  RECEIVE_POKEMONS,
+  RECEIVE_POKEMON_INFO
 } from '../../utils/constants/actions.constants';
 
-export function selectedPokemon(state = '', action) {
+export function selectedPokemon(state = {}, action) {
   switch(action.type) {
-    case SELECT_POKEMON:
-      return action.id;
+    case RECEIVE_POKEMON_INFO:
+      return action.pokeInfo
     default:
       return state;
   }
@@ -15,22 +14,15 @@ export function selectedPokemon(state = '', action) {
 
 export function pokemons(
   state = {
-    isFetching: false,
     pokemon: []
   },
   action
 ) {
   switch (action.type) {
-    case REQUEST_POKEMONS:
-      return {
-        ...state,
-        isFetching: true
-      };
     case RECEIVE_POKEMONS:
-      return Object.assign({}, state, {
-        isFetching: false,
+      return {
         pokemon: action.pokemon
-      });
+      };
     default:
       return state;
   }

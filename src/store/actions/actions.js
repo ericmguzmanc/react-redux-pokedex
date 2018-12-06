@@ -1,25 +1,10 @@
 import {
-  REQUEST_POKEMONS,
   RECEIVE_POKEMONS,
-  SELECT_POKEMON
+  RECEIVE_POKEMON_INFO
 } from '../../utils/constants/actions.constants';
 import { POKE_API_URL} from '../../utils/constants/poke-api.constants';
 import axios from 'axios';
-import { reducePokeList } from '../../utils/functons/reduce-pokeList';
-
-export function selectPokemon(pokemon) {
-  return {
-    type: SELECT_POKEMON,
-    pokemon: pokemon
-  }
-}
-
-export function requestPokemons(pokemon) {
-  return {
-    type: REQUEST_POKEMONS,
-    pokemon
-  }
-}
+import { reducePokeList, reducePokeInfo } from '../../utils/functons/reduce-pokeObjects';
 
 export function receivePokemon(data) {
   return {
@@ -28,11 +13,30 @@ export function receivePokemon(data) {
   }
 }
 
+export function receivePokemonInfo(data) {
+  return {
+    type: RECEIVE_POKEMON_INFO,
+    pokeInfo: data,
+  }
+}
+
 export function fetchPokemon() {
   return dispatch => {
-    dispatch(requestPokemons());    
     axios.get(`${POKE_API_URL}/pokemon/`)
       .then(response => dispatch(receivePokemon(reducePokeList(response.data.results))))
   }
 }
+
+export function fetchPokemonInfo(id) {
+  return dispatch => {
+    axios.get(`${POKE_API_URL}/pokemon/${id}/`)
+      .then((response) => {
+        axios.get(`${POKE_API_URL}/pokemon-species/${id}/`)
+        .then((pokemonSpecies) => {
+          dispatch(receivePokemonInfo(reducePokeInfo({...response.data, ...pokemonSpecies.data})))
+        });
+      });
+  }
+}
+
 
