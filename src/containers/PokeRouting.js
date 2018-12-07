@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-// import PokeDetail from '../components/PokeDetail';
+import PokeDetail from '../components/PokeDetail';
 import NotFound from '../components/NotFound';
 import withSuspense from '../components/withSuspense';
 
 const PokeList = withSuspense(import('../components/PokeList'));
-const PokeDetail = withSuspense(import('../components/PokeDetail'));
+// const PokeDetail = withSuspense(import('../components/PokeDetail'));
 
 const PokeRouter = () => (
   <Router>

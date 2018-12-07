@@ -6,7 +6,6 @@ import PokeCard from './PokeCard';
 const CardWrapper = withRouter(({pokemon, history, ...props}) => {
  
   const handleClick = () => {
-    console.log('got in handle click ', pokemon);
     history.push(`/pokemons/${pokemon.id}`);
   };
 
