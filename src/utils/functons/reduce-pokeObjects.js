@@ -1,3 +1,5 @@
+import { findIndex } from 'lodash';
+
 export function reducePokeList(pokelist) {
   return pokelist.map( (poke, index) => {
     poke.id =  index + 1;
@@ -27,7 +29,12 @@ export function reducePokeInfo(pokeInfo) {
     height,
     weight,
     sprites: sprites,
-    flavor_text_entries: flavor_text_entries
+    flavor_text: getFlavorTexEntryByLan(flavor_text_entries)
   }
 
+}
+
+function getFlavorTexEntryByLan(flavors) {
+  const flavorIndex = findIndex(flavors, { 'language': {'name': 'en' }});
+  return flavors[flavorIndex].flavor_text;
 }

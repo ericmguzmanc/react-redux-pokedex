@@ -4,14 +4,13 @@ import { POKE_SPRITE_URL } from '../utils/constants/poke-api.constants';
 
 
 const PokeCard = ({isLoading, pokemon}) => {
-    
     if (isLoading) {
       return null;
     }
 
     return (
       <Fragment>
-        <Card key={pokemon.id}>
+        <Card key={pokemon.id} style={{cursor: 'pointer'}}>
           <CardImg style={{width: "18rem"}} top src={`${POKE_SPRITE_URL}${pokemon.id}.png`} />
           <CardBody>
             <CardTitle>{`#${pokemon.id} ${pokemon.name}`}</CardTitle>

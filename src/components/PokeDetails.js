@@ -1,11 +1,12 @@
 import React, {Fragment, PureComponent} from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, CardTitle, CardText } from 'reactstrap'
+import { Button, Col, Row } from 'reactstrap'
 import { fetchPokemonInfo } from '../store/actions/actions';
 import PokeCard from './PokeCard';
+import PokeInfo from './PokeInfo';
 import Loading from './Loading';
 
-class PokeDetail extends PureComponent {
+class PokeDetails extends PureComponent {
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -32,25 +33,29 @@ class PokeDetail extends PureComponent {
         <Loading isLoading={isLoading} />
        
         <ShowWhenReady isLoading={isLoading}>
-          <div style={{width:"75px", margin: "5px -15px", position: 'absolute'}}>
-            <Button outline color="primary" onClick={this.handleBackClick}>
-              <span role="img" aria-label="back button">👈</span>
-            </Button>
-          </div>
-        <div style={{width:"330px", display: "inline-block", margin: "5px"}}>
-          <PokeCard 
-            isLoading={isLoading}
-            pokemon={selectedPokemon}
-            />
-        </div>
-        <div style={{width:"660px", display: "inline-block", margin: "5px"}}>
-          <Card>
-            <CardBody>
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </CardBody>
-          </Card>
-        </div>
+          <Row>
+            <Col>
+              <div style={{width:"75px", marginTop: "5px", position: 'absolute'}}>
+                <Button outline color="primary" onClick={this.handleBackClick}>
+                  <span role="img" aria-label="back button">👈</span>
+                </Button>
+              </div>
+            </Col>
+            <Col>
+              <div style={{width:"330px", display: "inline-block"}}>
+                <PokeCard 
+                  isLoading={isLoading}
+                  pokemon={selectedPokemon}
+                  />
+              </div>
+            </Col>
+            <Col>
+              <PokeInfo 
+                isLoading={isLoading}
+                pokemon={selectedPokemon}
+              />
+            </Col>
+        </Row>
         </ShowWhenReady>
       </Fragment>
     );
@@ -64,4 +69,4 @@ const mapStateToProps = ({ selectedPokemon }) => (
   }
 );
 
-export default connect(mapStateToProps, { fetchPokemonInfo })(PokeDetail);
+export default connect(mapStateToProps, { fetchPokemonInfo })(PokeDetails);
