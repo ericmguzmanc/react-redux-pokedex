@@ -1,10 +1,11 @@
 import { findIndex } from 'lodash';
 
 export function reducePokeList(pokelist) {
-  return pokelist.map( (poke, index) => {
+  const reducedPokelist = pokelist.map( (poke, index) => {
     poke.id =  index + 1;
     return poke;
-  }).filter(poke => poke.id <= 18);
+  }).filter(poke => poke.id <= 151);
+  return createGroupedArray(reducedPokelist, 18);
 }
 
 export function reducePokeInfo(pokeInfo) {
@@ -37,4 +38,12 @@ export function reducePokeInfo(pokeInfo) {
 function getFlavorTexEntryByLan(flavors) {
   const flavorIndex = findIndex(flavors, { 'language': {'name': 'en' }});
   return flavors[flavorIndex].flavor_text;
+}
+
+function createGroupedArray(arr, chunkSize) {
+  let groups = [], i;
+  for (i = 0; i < arr.length; i += chunkSize) {
+    groups.push(arr.slice(i, i + chunkSize));
+  }
+  return groups;
 }

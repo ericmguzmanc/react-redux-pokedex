@@ -27,14 +27,16 @@ action) {
 
 export function pokemons(
   state = {
-    pokemon: []
+    pokemon: [],
+    isLoading: true,
   },
   action
 ) {
   switch (action.type) {
     case RECEIVE_POKEMONS:
       return {
-        pokemon: action.pokemon
+        pokemon: action.pokemon,
+        isLoading: false,
       };
     default:
       return state;
