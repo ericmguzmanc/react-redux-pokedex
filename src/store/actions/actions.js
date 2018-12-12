@@ -1,11 +1,13 @@
 import {
   RECEIVE_POKEMONS,
   RECEIVE_POKEMON_INFO,
-  REQUEST_POKEMON_INFO
+  REQUEST_POKEMON_INFO,
+  GO_NEXT_PAGE,
+  SET_SCROLL_HEIGHT
 } from '../../utils/constants/actions.constants';
-import { POKE_API_URL} from '../../utils/constants/poke-api.constants';
-import axios from 'axios';
-import { reducePokeList, reducePokeInfo } from '../../utils/functons/reduce-pokeObjects';
+import { reducePokeList } from '../../utils/functons/reduce-pokeObjects';
+import { nextPage } from '../../utils/functons/pages';
+import PokeService from '../../utils/services/poke-service';
 
 export function receivePokemon(data) {
   return {
@@ -28,24 +30,44 @@ export function requestPokemonInfo(pokemon) {
   }
 }
 
+export function goNextPage(payload) {
+  return {
+    type: GO_NEXT_PAGE,
+    payload: payload
+  }
+}
+
+export function onScrollHeight(payload) {
+  return {
+    type: SET_SCROLL_HEIGHT,
+    payload: payload
+  }
+}
+
 export function fetchPokemon() {
   return dispatch => {
-    axios.get(`${POKE_API_URL}/pokemon/`)
-      .then(response => dispatch(receivePokemon(reducePokeList(response.data.results))))
+    PokeService.getPokemons()
+    .then(response => { 
+        const receivedPokemon = reducePokeList(response.data.results);
+        dispatch(receivePokemon(receivedPokemon))
+      })
   }
 }
 
 export function fetchPokemonInfo(id) {
   return dispatch => {
     dispatch(requestPokemonInfo());
-    axios.get(`${POKE_API_URL}/pokemon/${id}/`)
-      .then((response) => {
-        axios.get(`${POKE_API_URL}/pokemon-species/${id}/`)
-        .then((pokemonSpecies) => {
-          dispatch(receivePokemonInfo(reducePokeInfo({...response.data, ...pokemonSpecies.data})))
-        });
-      });
+    PokeService.getPokemonById(id)
+    .then(response => dispatch(receivePokemonInfo(response)));
   }
+}
+
+export function onPaginatedSearch(fetchedPokemon, pokemons, page) {
+  return dispatch => {
+    if (page < fetchedPokemon.length - 1){ 
+      dispatch(goNextPage(nextPage(fetchedPokemon, pokemons, page)));
+    }
+  };
 }
 
 

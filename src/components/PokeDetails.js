@@ -34,26 +34,29 @@ class PokeDetails extends PureComponent {
        
         <ShowWhenReady isLoading={isLoading}>
           <Row>
-            <Col>
-              <div style={{width:"75px", marginTop: "5px", position: 'absolute'}}>
-                <Button outline color="primary" onClick={this.handleBackClick}>
-                  <span role="img" aria-label="back button">👈</span>
-                </Button>
-              </div>
-            </Col>
-            <Col>
-              <div style={{width:"330px", display: "inline-block"}}>
+          <Col sm="1" className="text-left">
+            <div style={{marginTop: "5px", position: ""}}>
+              <Button outline color="primary" onClick={this.handleBackClick}>
+                <span role="img" aria-label="back button">👈</span>
+              </Button>
+            </div>
+          </Col>
+            <Col sm="4">
+              <div style={{ display: "inline-block",  marginTop: "5px"}}>
                 <PokeCard 
                   isLoading={isLoading}
                   pokemon={selectedPokemon}
                   />
               </div>
             </Col>
-            <Col>
-              <PokeInfo 
-                isLoading={isLoading}
-                pokemon={selectedPokemon}
-              />
+             
+            <Col sm="7">
+              <div style={{ marginTop: "5px" }}>
+                <PokeInfo 
+                  isLoading={isLoading}
+                  pokemon={selectedPokemon}
+                  />
+              </div>
             </Col>
         </Row>
         </ShowWhenReady>

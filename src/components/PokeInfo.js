@@ -10,8 +10,7 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, type, abi
 
   return(
     <Fragment>
-      <div style={{width:"660px", display: "inline-block"}}>
-        {console.log('details render')}
+      <div style={{width:"100%", display: "inline-block"}}>
         <Card>
           <CardBody>
             <CardTitle></CardTitle>
@@ -19,7 +18,7 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, type, abi
           </CardBody>
         </Card>
       </div>
-      <div style={{width:"660px", display: "inline-block", marginTop: "5px"}}>
+      <div style={{width:"100%", display: "inline-block", marginTop: "5px"}}>
         <Card>
           <CardBody>
             <CardTitle></CardTitle>

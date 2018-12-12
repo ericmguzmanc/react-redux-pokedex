@@ -6,13 +6,12 @@ import PokeCard from './PokeCard';
 const CardWrapper = withRouter(({pokemon, history, ...props}) => {
  
   const handleClick = () => {
-    console.log('where? ', window.innerHeight, ' ', window.scrollY);
     history.push(`/pokemons/${pokemon.id}`);
   };
 
   return(
     <Fragment>
-      <div onClick={() => handleClick()} style={{width:"330px", display: "inline-block", margin: "5px"}}>
+      <div onClick={() => handleClick()} style={{ display: "inline-block", margin: "5px"}}>
         <PokeCard 
           key={pokemon.id}
           pokemon={pokemon}
