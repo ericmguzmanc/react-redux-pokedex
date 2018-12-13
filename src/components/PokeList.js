@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CardWrapper from './CardWrapper';
 import {  onPaginatedSearch } from '../store/actions/actions';
 import { onScrollHeight } from '../store/actions/actions';
+import { Animated } from 'react-animated-css';
 
 class PokeList extends PureComponent {
 
@@ -31,14 +32,16 @@ class PokeList extends PureComponent {
 
     return (
       <Fragment>
-        {
-          this.props.pokemons.map(pokemon =>(
-            <CardWrapper 
-              key={pokemon.id}
-              pokemon={pokemon}
-            />
-          ))
-        }
+        <Animated animationIn="fadeIn" animationOut="fadeOut">
+          {
+            this.props.pokemons.map(pokemon =>(
+              <CardWrapper 
+                key={pokemon.id}
+                pokemon={pokemon}
+              />
+            ))
+          }
+        </Animated>
       </Fragment>
     );
   }

@@ -5,6 +5,7 @@ import { fetchPokemonInfo } from '../store/actions/actions';
 import PokeCard from './PokeCard';
 import PokeInfo from './PokeInfo';
 import Loading from './Loading';
+import { Animated } from 'react-animated-css';
 
 class PokeDetails extends PureComponent {
 
@@ -31,35 +32,38 @@ class PokeDetails extends PureComponent {
     return (
       <Fragment>
         <Loading isLoading={isLoading} />
-       
-        <ShowWhenReady isLoading={isLoading}>
-          <Row>
-          <Col sm="1" className="text-left">
-            <div style={{marginTop: "5px", position: ""}}>
-              <Button outline color="primary" onClick={this.handleBackClick}>
-                <span role="img" aria-label="back button">👈</span>
-              </Button>
-            </div>
-          </Col>
-            <Col sm="4">
-              <div style={{ display: "inline-block",  marginTop: "5px"}}>
-                <PokeCard 
-                  isLoading={isLoading}
-                  pokemon={selectedPokemon}
-                  />
+       <Animated animationIn="fadeIn" animationOut="fadeOut">
+          <ShowWhenReady isLoading={isLoading}>
+            <Row>
+            <Col sm="1" className="text-left">
+              <div style={{marginTop: "5px", position: ""}}>
+                <Button outline color="primary" onClick={this.handleBackClick}>
+                  <span role="img" aria-label="back button">👈</span>
+                </Button>
               </div>
             </Col>
-             
-            <Col sm="7">
-              <div style={{ marginTop: "5px" }}>
-                <PokeInfo 
-                  isLoading={isLoading}
-                  pokemon={selectedPokemon}
-                  />
-              </div>
-            </Col>
-        </Row>
-        </ShowWhenReady>
+              <Col sm="4">
+                <div style={{ display: "inline-block",  marginTop: "5px"}}>
+                  <PokeCard 
+                    isLoading={isLoading}
+                    pokemon={selectedPokemon}
+                    pokeTypes={true}
+                    pokeAnimated={true}
+                    />
+                </div>
+              </Col>
+              
+              <Col sm="7">
+                <div style={{ marginTop: "5px" }}>
+                  <PokeInfo 
+                    isLoading={isLoading}
+                    pokemon={selectedPokemon}
+                    />
+                </div>
+              </Col>
+          </Row>
+          </ShowWhenReady>
+        </Animated>
       </Fragment>
     );
   }

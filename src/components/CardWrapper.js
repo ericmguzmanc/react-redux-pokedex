@@ -15,6 +15,8 @@ const CardWrapper = withRouter(({pokemon, history, ...props}) => {
         <PokeCard 
           key={pokemon.id}
           pokemon={pokemon}
+          pokeTypes={false}
+          pokeAnimated={false}
         />
       </div>
     </Fragment>

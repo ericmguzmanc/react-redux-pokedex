@@ -8,7 +8,6 @@ export function general (
 ) {
   switch (action.type) {
     case SET_SCROLL_HEIGHT:
-    console.log('scrollHeight ', action.payload)
       return {
         scrollHeight: action.payload,
       };

@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/Loading.css';
+import { Animated } from 'react-animated-css';
 
 const Loading = ({ isLoading }) => {
   
@@ -10,15 +11,17 @@ const Loading = ({ isLoading }) => {
   }
 
   return(
-    <div className="pokeball" style={{position: 'absolute', marginTop: '-150px'}}>
-      <div className="upper">
-        <div className="inner"></div>
+    <Animated animationIn="fadeIn" animationOut="fadeOut">
+      <div className="pokeball" style={{position: 'absolute', marginTop: '-150px'}}>
+        <div className="upper">
+          <div className="inner"></div>
+        </div>
+        <div className="middle"></div>
+        <div className="lower">
+          <div className="inner"></div>
+        </div>
       </div>
-      <div className="middle"></div>
-      <div className="lower">
-        <div className="inner"></div>
-      </div>
-    </div>
+    </Animated>
   );
 };
 

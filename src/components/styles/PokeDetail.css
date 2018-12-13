@@ -1,0 +1,46 @@
+@media screen and (max-width: 600px) {
+  .progress-title {
+    font-size: 0.7rem;
+  }
+}
+.hp-stat.progress .progress-bar {
+  background-color: #FF5959;
+}
+.attack-stat.progress .progress-bar {
+  background-color: rgb(243, 163, 106);
+}
+.defense-stat.progress .progress-bar {
+  background-color: rgb(255, 219, 73);
+}
+.special-attack-stat.progress .progress-bar {
+  background-color: rgb(131, 166, 250);
+}
+.special-defense-stat.progress .progress-bar {
+  background-color: rgb(148, 219, 112);
+}
+.speed-stat.progress .progress-bar {
+  background-color: rgb(252, 140, 173);
+}
+.progress-bar {
+  font-weight: 500;
+  color:white;
+}
+
+
+
+.animate-progress-bar {
+  width: 0;
+  animation: progress 1.5s ease-in-out forwards;
+} 
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+} 
+
+
+

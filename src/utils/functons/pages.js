@@ -7,3 +7,7 @@ export function nextPage(fetchedPokemon, pokemons, page) {
   };
   return payload
 }
+
+export function firstCharToUpperCase(str) {
+  return (str.length === 2) ? str.toUpperCase() : str.charAt(0).toUpperCase() + str.slice(1);
+}
