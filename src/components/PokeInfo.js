@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { Card, CardBody, CardHeader, CardTitle, CardText, Progress, Row, Col} from 'reactstrap';
+import { Card, CardBody, CardHeader, CardTitle, CardText, Progress, Row, Col, Badge} from 'reactstrap';
 import { firstCharToUpperCase } from '../utils/functons/pages';
-import {  getPokeStatsLimit } from '../utils/functons/reduce-pokeObjects';
+import {  getPokeStatsLimit, getPokeWeight, getPokeSize } from '../utils/functons/reduce-pokeObjects';
 import './styles/PokeDetail.css';
 
 
-const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, type, abilities, stats }}) => {
+const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, stats }}) => {
   
   if (isLoading) {
     return null;
@@ -13,7 +13,7 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, type, abi
 
   return(
     <Fragment>
-      <div style={{width:"100%", display: "inline-block", marginBottom: "5px"}}>
+      <div style={{marginBottom: "5px"}}>
         <Card>
           <CardHeader>
             <CardTitle style={{marginBottom: "0rem"}}>Stats</CardTitle>
@@ -27,11 +27,24 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, type, abi
           </CardBody>
         </Card>
       </div>
-      <div style={{width:"100%", display: "inline-block"}}>
+      <div style={{width:"100%"}}>
         <Card>
+          <CardHeader>
+            <Row>
+              <Col xs="6" className="poke-body-property height">
+                <span>Height:</span> 
+                <Badge color="secondary" pill>{getPokeSize(height, 'dm')}</Badge>
+              </Col>
+              <Col xs="6" className="poke-body-property weight">
+                <span>Weight:</span> 
+              <Badge color="secondary" pill>{getPokeWeight(weight, 'hg')}</Badge>
+              </Col>
+            </Row>
+          </CardHeader>
           <CardBody>
-            <CardTitle></CardTitle>
-              <CardText>{flavor_text}</CardText>
+              <CardText>
+                {flavor_text}
+              </CardText>
           </CardBody>
         </Card>
       </div>
@@ -45,47 +58,10 @@ const renderPokeStats = ( stats, index ) => {
     <Row style={{marginBottom:"10px"}} key={index}>
       <Col xs="3" className="progress-title" style={statTitlesStyles}>{firstCharToUpperCase(name)}</Col>
       <Col xs="9">
-        <Progress className={`${name}-stat`} barClassName="animate-progress-bar" value={base_stat} max={getPokeStatsLimit(name)}>{base_stat}</Progress>
-        {/* <div className={`progress ${name}-stat`}>
-          <div className="progress-bar" role="progressbar" style="width: 100%" aria-valuenow={base_stat} aria-valuemin="0" aria-valuemax={getPokeStatsLimit(name)}>{base_stat}</div>
-        </div> */}
+        <Progress barClassName={`${name}-stat`} value={base_stat} max={getPokeStatsLimit(name)}>{base_stat}</Progress>
       </Col>
     </Row>  
   )
-}
-
-// const getKeyframeName = () => {
-//   return `@keyframe ${animationName} {
-//     from {
-//       width: 0;
-//     }
-//     to {
-//       width: 100%;
-//     }
-//   }`;
-// }
-
-
-const pstyle = `
-  
-.animate-progress-bar {
-  width: 0;
-  animation: progress 1.5s ease-in-out forwards;
-} 
-
-@keyframes progress {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-} 
-
-`;
-
-const renderProgressValue = (value) => {
-
 }
 
 const statTitlesStyles = {
@@ -94,8 +70,6 @@ const statTitlesStyles = {
   fontWeight: "bold",
   color: "#363636"
 };
-
-
 
 
 export default PokeInfo;

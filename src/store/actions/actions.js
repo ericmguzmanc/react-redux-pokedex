@@ -3,7 +3,8 @@ import {
   RECEIVE_POKEMON_INFO,
   REQUEST_POKEMON_INFO,
   GO_NEXT_PAGE,
-  SET_SCROLL_HEIGHT
+  SET_SCROLL_HEIGHT,
+  SET_CURRENT_URL
 } from '../../utils/constants/actions.constants';
 import { reducePokeList } from '../../utils/functons/reduce-pokeObjects';
 import { nextPage } from '../../utils/functons/pages';
@@ -40,6 +41,13 @@ export function goNextPage(payload) {
 export function onScrollHeight(payload) {
   return {
     type: SET_SCROLL_HEIGHT,
+    payload: payload
+  }
+}
+
+export function setCurrentUrl(payload) {
+  return {
+    type: SET_CURRENT_URL,
     payload: payload
   }
 }

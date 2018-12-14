@@ -21,10 +21,16 @@ export const pokeColors = [
 ]
 
 export const pokeMaxStats = [
-  { name: 'HP', value: 255, color: '#FF5959'},
-  { name: 'ATTACK', value: 180, color: '#F5AC78'},
-  { name: 'DEFENSE', value: 230, color: '#FAE078'},
-  { name: 'SPECIAL-ATTACK', value: 180, color: '#9DB7F5'},
-  { name: 'SPECIAL-DEFENSE', value: 230, color: '#A7DB8D'},
-  { name: 'SPEED', value: 180, color: '#FA92B2'},
+  { name: 'HP', value: 250, color: '#FF5959'},
+  { name: 'ATTACK', value: 250, color: '#F5AC78'},
+  { name: 'DEFENSE', value: 250, color: '#FAE078'},
+  { name: 'SPECIAL-ATTACK', value: 250, color: '#9DB7F5'},
+  { name: 'SPECIAL-DEFENSE', value: 250, color: '#A7DB8D'},
+  { name: 'SPEED', value: 250, color: '#FA92B2'},
 ];
+
+export const _typesOfMeasure = { 'cm': 0.01, 'dm': 0.1, 'm': 1 };
+export const _feetPerMeter = 3.28084;
+export const _inchesPerFeet = 12;
+export const _typesOfWeight = {'cg': 0.01, 'dg': 0.1, 'g': 1, 'dag': 10, 'hg': 100, 'kg': 1000};
+export const _poundPerGram = 0.00220462;

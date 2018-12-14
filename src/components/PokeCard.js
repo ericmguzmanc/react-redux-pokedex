@@ -13,7 +13,7 @@ const PokeCard = ({isLoading, pokemon, pokeTypes, pokeAnimated}) => {
 
     const pokeCardStyle = {
       cursor: "pointer",
-      width: "20rem",
+      width: "21rem",
       color: "#1c1c1c",
       background: (!pokeTypes) ? "white" : getPokeGradient(pokemon)
     }

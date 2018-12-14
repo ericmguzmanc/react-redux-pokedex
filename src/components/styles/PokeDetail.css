@@ -3,22 +3,22 @@
     font-size: 0.7rem;
   }
 }
-.hp-stat.progress .progress-bar {
+.hp-stat {
   background-color: #FF5959;
 }
-.attack-stat.progress .progress-bar {
+.attack-stat {
   background-color: rgb(243, 163, 106);
 }
-.defense-stat.progress .progress-bar {
+.defense-stat {
   background-color: rgb(255, 219, 73);
 }
-.special-attack-stat.progress .progress-bar {
+.special-attack-stat {
   background-color: rgb(131, 166, 250);
 }
-.special-defense-stat.progress .progress-bar {
+.special-defense-stat {
   background-color: rgb(148, 219, 112);
 }
-.speed-stat.progress .progress-bar {
+.speed-stat {
   background-color: rgb(252, 140, 173);
 }
 .progress-bar {
@@ -26,21 +26,41 @@
   color:white;
 }
 
-
-
-.animate-progress-bar {
+.hp-stat,.attack-stat, .defense-stat, .special-attack-stat,
+.special-defense-stat, .speed-stat{
   width: 0;
   animation: progress 1.5s ease-in-out forwards;
 } 
+
 
 @keyframes progress {
   from {
     width: 0;
   }
-  to {
-    width: 100%;
-  }
-} 
+}
 
+.poke-body-property {
+  text-align: center;
+}
 
+.poke-body-property span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.poke-body-property.height {
+  text-align: right;
+}
+
+.poke-body-property.weight {
+  text-align: left;
+}
+
+.detail-main-content-row {
+  margin-bottom: 10px;
+}
+
+.back-btn {
+  border: solid 2px rgb(87, 87, 87);
+}
 

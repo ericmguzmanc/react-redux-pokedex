@@ -1,17 +1,21 @@
 import React, {Fragment, PureComponent} from 'react';
 import { connect } from 'react-redux';
 import { Button, Col, Row } from 'reactstrap'
-import { fetchPokemonInfo } from '../store/actions/actions';
+import { fetchPokemonInfo, setCurrentUrl } from '../store/actions/actions';
 import PokeCard from './PokeCard';
 import PokeInfo from './PokeInfo';
 import Loading from './Loading';
 import { Animated } from 'react-animated-css';
+import ShowWhenReady from './ShowWhenReady';
+import './styles/PokeDetail.css';
 
 class PokeDetails extends PureComponent {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+    const { history : { location : { pathname } } } = this.props;
     this.props.fetchPokemonInfo(id);
+    this.props.setCurrentUrl(pathname)
   }
 
   handleBackClick = () => {
@@ -21,37 +25,30 @@ class PokeDetails extends PureComponent {
 
   render () {
     const { isLoading, selectedPokemon } = this.props;
-    
-    const ShowWhenReady = ({isLoading, children}) => {
-      if (isLoading) {
-        return null;
-      }
-      return(children);
-    }
 
     return (
       <Fragment>
         <Loading isLoading={isLoading} />
-       <Animated animationIn="fadeIn" animationOut="fadeOut">
+        <Animated animationIn="fadeIn" animationOut="fadeOut">
           <ShowWhenReady isLoading={isLoading}>
-            <Row>
-            <Col sm="1" className="text-left">
-              <div style={{marginTop: "5px", position: ""}}>
-                <Button outline color="primary" onClick={this.handleBackClick}>
-                  <span role="img" aria-label="back button">👈</span>
-                </Button>
-              </div>
-            </Col>
-              <Col sm="4">
-                <div style={{ display: "inline-block",  marginTop: "5px"}}>
-                  <PokeCard 
-                    isLoading={isLoading}
-                    pokemon={selectedPokemon}
-                    pokeTypes={true}
-                    pokeAnimated={true}
-                    />
+            <Row className="detail-main-content-row">
+              <Col sm="1" className="text-left">
+                <div style={{marginTop: "5px"}}>
+                  <Button outline color="secondary" className="back-btn" onClick={this.handleBackClick}>
+                    <span role="img" aria-label="back button">👈</span>
+                  </Button>
                 </div>
               </Col>
+                <Col sm="4" style={{marginLeft: "0px"}}>
+                  <div style={{marginTop: "5px"}}>
+                    <PokeCard 
+                      isLoading={isLoading}
+                      pokemon={selectedPokemon}
+                      pokeTypes={true}
+                      pokeAnimated={true}
+                      />
+                  </div>
+                </Col>
               
               <Col sm="7">
                 <div style={{ marginTop: "5px" }}>
@@ -61,7 +58,7 @@ class PokeDetails extends PureComponent {
                     />
                 </div>
               </Col>
-          </Row>
+            </Row>
           </ShowWhenReady>
         </Animated>
       </Fragment>
@@ -76,4 +73,4 @@ const mapStateToProps = ({ selectedPokemon }) => (
   }
 );
 
-export default connect(mapStateToProps, { fetchPokemonInfo })(PokeDetails);
+export default connect(mapStateToProps, { fetchPokemonInfo, setCurrentUrl })(PokeDetails);

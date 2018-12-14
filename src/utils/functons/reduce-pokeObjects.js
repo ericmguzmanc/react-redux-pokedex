@@ -1,5 +1,6 @@
-import { findIndex, find } from 'lodash';
+import { findIndex, find, padStart } from 'lodash';
 import { pokeColors, pokeMaxStats } from '../constants/poke-util.constants';
+import { _typesOfMeasure, _feetPerMeter, _inchesPerFeet, _poundPerGram, _typesOfWeight } from '../constants/poke-util.constants';
 
 export function reducePokeList(pokelist) {
   const reducedPokelist = pokelist.map( (poke, index) => {
@@ -35,7 +36,6 @@ export function reducePokeInfo(pokeInfo) {
     types: types,
     flavor_text: getFlavorTexEntryByLan(flavor_text_entries)
   }
-
 }
 
 export function getFlavorTexEntryByLan(flavors) {
@@ -62,7 +62,7 @@ export function getPokeGradient(pokemon){
     gradient += `${getPokemonTypeColor(element)} ${(index) ? 50 : 0}%,${getPokemonTypeColor(element)} ${(index) ? 100 : 50}%,`;
   });
   gradient = gradient.substring(0, gradient.length - 1);
-  gradient += ")"
+  gradient += ")";
   return gradient;
 }
 
@@ -74,4 +74,36 @@ export function getPokeStatsLimit(stat) {
 export function getPokePropertyColor(stat) {
   const color = find(pokeMaxStats, ['name', stat.toUpperCase()]);
   return color.color
+}
+
+export function getPokeSize(value, type) {
+  let meters = getMeters(value, type),
+  feet = meters * _feetPerMeter,
+  roundedFeet = Math.floor(feet),
+  inches = Math.round((feet - roundedFeet) * _inchesPerFeet);
+  return `${roundedFeet}' ${padStart(inches.toString(), 2, '0')}" `;
+}
+
+export function getMeters(value, type) {
+  let conversion = _typesOfMeasure[type];
+  if(conversion == null){
+    throw new Error("Could not find type");
+  } else {
+    return value * conversion; 
+  }
+}
+
+export function getPokeWeight(value, type, decimals) {
+  let grams = getGrams(value, type),
+      pounds = grams * _poundPerGram;
+  return `${pounds.toFixed(1)} lbs`;
+}
+
+export function getGrams(value, type) {
+  let conversion = _typesOfWeight[type];
+  if(conversion == null) {
+    throw new Error("Could not find type");
+  } else {
+    return value * conversion;
+  }
 }
