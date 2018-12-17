@@ -5,16 +5,19 @@ import {  getPokeStatsLimit, getPokeWeight, getPokeSize } from '../utils/functon
 import './styles/PokeDetail.css';
 
 
-const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, stats }}) => {
+const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, stats }, darkMode}) => {
   
   if (isLoading) {
     return null;
   }
 
+  const isDarkMode = (darkMode) ? 'dark-mode-card' : '';
+  
+
   return(
     <Fragment>
       <div style={{marginBottom: "5px"}}>
-        <Card>
+        <Card className={isDarkMode}>
           <CardHeader>
             <CardTitle style={{marginBottom: "0rem"}}>Stats</CardTitle>
           </CardHeader>
@@ -28,7 +31,7 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, stats }})
         </Card>
       </div>
       <div style={{width:"100%"}}>
-        <Card>
+        <Card className={isDarkMode}>
           <CardHeader>
             <Row>
               <Col xs="6" className="poke-body-property height">
@@ -68,7 +71,7 @@ const statTitlesStyles = {
   margin: "0px",
   textAlign: "right",
   fontWeight: "bold",
-  color: "#363636"
+  color: `${PokeInfo.darkMode} ? "#ededed" : "#363636" `
 };
 
 

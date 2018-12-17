@@ -8,6 +8,8 @@ import Loading from './Loading';
 import { Animated } from 'react-animated-css';
 import ShowWhenReady from './ShowWhenReady';
 import './styles/PokeDetail.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft }  from '@fortawesome/free-solid-svg-icons';
 
 class PokeDetails extends PureComponent {
 
@@ -23,8 +25,13 @@ class PokeDetails extends PureComponent {
     history.push('/pokemons/');
   }
 
+  
   render () {
-    const { isLoading, selectedPokemon } = this.props;
+    const { isLoading, selectedPokemon, darkMode } = this.props;
+    const backBtnStyle = {
+      color: `${(darkMode) ? "#41454d" : " white"}`,
+      background: `${(darkMode) ? "white" : "#41454d"}`
+    };
 
     return (
       <Fragment>
@@ -34,8 +41,8 @@ class PokeDetails extends PureComponent {
             <Row className="detail-main-content-row">
               <Col sm="1" className="text-left">
                 <div style={{marginTop: "5px"}}>
-                  <Button outline color="secondary" className="back-btn" onClick={this.handleBackClick}>
-                    <span role="img" aria-label="back button">👈</span>
+                  <Button outline={darkMode} color="secondary" className="back-btn" style={backBtnStyle} onClick={this.handleBackClick}>
+                    <FontAwesomeIcon icon={faArrowLeft}/>
                   </Button>
                 </div>
               </Col>
@@ -55,6 +62,7 @@ class PokeDetails extends PureComponent {
                   <PokeInfo 
                     isLoading={isLoading}
                     pokemon={selectedPokemon}
+                    darkMode={this.props.darkMode}
                     />
                 </div>
               </Col>
@@ -66,10 +74,11 @@ class PokeDetails extends PureComponent {
   }
 };
 
-const mapStateToProps = ({ selectedPokemon }) => (
+const mapStateToProps = ({ selectedPokemon, general: { darkMode } }) => (
   {
     isLoading: selectedPokemon.isLoading,
-    selectedPokemon: selectedPokemon.data
+    selectedPokemon: selectedPokemon.data,
+    darkMode
   }
 );
 

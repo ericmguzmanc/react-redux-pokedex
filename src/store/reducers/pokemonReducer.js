@@ -2,7 +2,8 @@ import {
   RECEIVE_POKEMONS,
   RECEIVE_POKEMON_INFO,
   REQUEST_POKEMON_INFO,
-  GO_NEXT_PAGE
+  GO_NEXT_PAGE,
+  SEARCH_POKEMON_QUERY
 } from '../../utils/constants/actions.constants';
 
 export function selectedPokemon(state = {
@@ -50,6 +51,13 @@ export function pokemons(
         pokemons: [...pokemons, ...fetchedPokemon[page]],
         page: page,
       };
+    case SEARCH_POKEMON_QUERY:
+    // const { pokemon } = action.payload;
+      return {
+        fetchedPokemon: state.fetchedPokemon,
+        pokemons: [...action.payload],
+        page: state.page
+      }
     default:
       return state;
   }

@@ -31,12 +31,27 @@ class PokeList extends PureComponent {
       (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
       this.props.pokemons.length
     ) {
-      const { fetchedPokemon, pokemons, page } = this.props;
-      this.props.onPaginatedSearch(fetchedPokemon, pokemons, page);
+      const { fetchedPokemon, pokemons, page, searchMode } = this.props;
+      if(!searchMode) {
+        this.props.onPaginatedSearch(fetchedPokemon, pokemons, page);
+      }
     }
   }
 
   render() {
+    
+    const searchBarStyle = {
+      textAlign: "center",
+      marginTop: "5px",
+      position: "fixed",
+      left: "0",
+      right: "0",
+      zIndex: "1",
+      padding: "5px",
+      paddingBottom: "10px",
+      backgroundColor: `${(this.props.darkMode) ? 'rgba(65,69,77,0.7)' : 'rgba(255,255,255,0.7)'}`,
+      borderBottom: "1px sollid gray"
+    };
 
     return (
       <Fragment>
@@ -55,6 +70,7 @@ class PokeList extends PureComponent {
                   <CardWrapper 
                     key={pokemon.id}
                     pokemon={pokemon}
+                    darkMode={this.props.darkMode}
                   />
                 ))
               }
@@ -66,25 +82,16 @@ class PokeList extends PureComponent {
   }
 };
 
-const searchBarStyle = {
-  textAlign: "center",
-  marginTop: "5px",
-  position: "fixed",
-  left: "0",
-  right: "0",
-  zIndex: "1",
-  padding: "5px",
-  backgroundColor: "rgba(255,255,255,0.7)",
-  borderBottom: "1px sollid gray"
-};
 
-const mapStateToProps = ({ pokemons: { fetchedPokemon, isLoading, pokemons, page }, general: { scrollHeight } }) => {
+const mapStateToProps = ({ pokemons: { fetchedPokemon, isLoading, pokemons, page }, general: { scrollHeight, darkMode, searchMode } }) => {
   return {
     fetchedPokemon,
     isLoading,
     page,
     pokemons,
-    scrollHeight
+    scrollHeight,
+    darkMode,
+    searchMode
   }
 };
 

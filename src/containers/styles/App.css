@@ -24,6 +24,24 @@
   color: #61dafb;
 }
 
+.darkMode {
+  background: #282c34;
+}
+
+.darkMode .dark-mode-btn {
+  background-color: #ededed;
+}
+
+.darkMode body {
+  background: #282c34;
+}
+/* 
+.darkMode .card {
+  color: white;
+  background-color: #282c34;
+} */
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -1,28 +1,68 @@
-import React, {Fragment} from 'react';
-import { Row, Button, Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import React, {Fragment, PureComponent} from 'react';
+import { connect } from 'react-redux';
+import { Row, Col } from 'reactstrap';
 import './styles/Search.css';
+import DarkMode from './DarkMode';
+import { searchPokemonQuery, searchModeOn, setSearchTerm, fetchPokemon } from '../store/actions/actions';
 
-const Search = () => {
-  return(
-    <Fragment>
-      <Row >
-        <Col xs="3"></Col>
-        <Col xs="3" style={{textAlign: "center", marginLeft: "-1.4%"}}>
-          <div className="search-div align-middle" >
-            <input type="search" placeholder="Search..." />
-          </div>
-        </Col>
-        <Col xs="5" style={{marginTop:"4px", marginLeft:"5.8%"}}>
-          <Button color="secondary" className="dark-mode-btn">
-            <FontAwesomeIcon icon={faMoon}/>
-          </Button>
-        </Col>
-        <Col xs="1"></Col>
-      </Row>
-    </Fragment>
-  );
+class Search extends PureComponent {
+
+  state = {
+    searchQuery: this.props.searchTerm,
+  };
+
+  handleChange = (e) => {
+    console.log('pokemons ', this.props.fetchedPokemon);
+
+    const value  = e.target.value;
+
+    this.setState({searchQuery: value});
+    this.props.searchPokemonQuery(value, this.props.fetchedPokemon);
+    this.props.setSearchTerm(value);
+    
+    if (value.length === 1) {
+      this.props.searchModeOn(true);
+    } else if (value.length < 1) {
+      this.props.searchModeOn(false);
+      this.props.fetchPokemon();
+    }
+  } 
+
+
+  render() {
+    return(
+      <Fragment>
+        <Row >
+          <Col xs="3"></Col>
+          <Col xs="3" style={{textAlign: "center", marginLeft: "-1.4%"}}>
+            <div className="search-div align-middle" >
+              <input type="search" placeholder="Search..." value={this.state.searchQuery} onChange={this.handleChange} />
+            </div>
+          </Col>
+          <Col xs="5" style={{marginTop:"4px", marginLeft:"5.8%"}}>
+            <DarkMode></DarkMode>
+          </Col>
+          <Col xs="1"></Col>
+        </Row>
+      </Fragment>
+    );
+  }
 }
 
-export default Search;
+
+const mapStateToProps = ({pokemons: {fetchedPokemon}, general: {searchTerm}}) => {
+  return {
+    fetchedPokemon,
+    searchTerm
+  }
+};
+
+
+export default connect(
+  mapStateToProps, 
+  { 
+    searchPokemonQuery, 
+    searchModeOn, 
+    setSearchTerm, 
+    fetchPokemon
+  })(Search);

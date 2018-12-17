@@ -6,3 +6,7 @@ export const SELECT_POKEMON = 'SELECT_POKEMON';
 export const GO_NEXT_PAGE = 'GO_NEXT_PAGE';
 export const SET_SCROLL_HEIGHT = 'SET_SCROLL_HEIGHT';
 export const SET_CURRENT_URL = 'SET_CURRENT_URL';
+export const SEARCH_POKEMON_QUERY = 'SEARCH_POKEMON_QUERY';
+export const DARK_MODE = 'DARK_MODE';
+export const SEARCH_MODE_ON = 'SEARCH_MODE_ON';
+export const SEARCH_TERM = 'SEARCH_TERM';

@@ -5,22 +5,25 @@ import { getPokeGradient } from '../utils/functons/reduce-pokeObjects';
 import { firstCharToUpperCase } from '../utils/functons/pages';
 import { Animated } from "react-animated-css";
 import '../assets/animate.css';
+import './styles/PokeCard.css';
 
-const PokeCard = ({isLoading, pokemon, pokeTypes, pokeAnimated}) => {
+const PokeCard = ({isLoading, pokemon, pokeTypes, pokeAnimated, darkMode}) => {
     if (isLoading) {
       return null;
     }
-
+    
+    const withDarkMode = (darkMode) ?  "#41454d" : "white";
     const pokeCardStyle = {
       cursor: "pointer",
       width: "21rem",
-      color: "#1c1c1c",
-      background: (!pokeTypes) ? "white" : getPokeGradient(pokemon)
-    }
+      color: `${(darkMode) ? "#ededed" : "#1c1c1c"}`,
+      border: `${(darkMode) ? "1px solid #5d626e" : ""}`,
+      background: (!pokeTypes) ? `${withDarkMode}`: getPokeGradient(pokemon)
+    };
 
     return (
       <Fragment>
-        <Card key={pokemon.id} style={pokeCardStyle}>
+        <Card key={pokemon.id} style={pokeCardStyle} className={`${(darkMode) ? 'dark-mode-card' : ''}`}> 
           <Animated animationIn="tada" isVisible={true} animateOnMount={pokeAnimated}>
             <CardImg style={{width: "18rem", "margin":"auto"}} top src={`${POKE_SPRITE_URL}${pokemon.id}.png`} />
           </Animated>

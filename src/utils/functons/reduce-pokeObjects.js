@@ -1,4 +1,4 @@
-import { findIndex, find, padStart } from 'lodash';
+import { findIndex, find, padStart, filter, debounce } from 'lodash';
 import { pokeColors, pokeMaxStats } from '../constants/poke-util.constants';
 import { _typesOfMeasure, _feetPerMeter, _inchesPerFeet, _poundPerGram, _typesOfWeight } from '../constants/poke-util.constants';
 
@@ -107,3 +107,21 @@ export function getGrams(value, type) {
     return value * conversion;
   }
 }
+
+export function doPokeQuery(query, pokemon) {
+
+  let a = [];
+  pokemon.forEach(group => {
+    a = [...a, ...group];
+  });
+
+  console.log('query ', query)
+  let foundPokemon = filter(a, (pokemon) => {
+    return pokemon.name.startsWith(query.toLowerCase());
+  })
+
+  return foundPokemon;
+
+}
+
+// export const debouncePokeQuery = debounce(doPokeQuery, 1000);

@@ -2,6 +2,8 @@ import React, { PureComponent} from 'react';
 import { connect } from 'react-redux';
 import { fetchPokemon } from '../store/actions/actions';
 import PokeRouter from './PokeRouting';
+import './styles/App.css'; 
+
 class PokeApp extends PureComponent {
 
   componentDidMount() {
@@ -9,8 +11,9 @@ class PokeApp extends PureComponent {
   }
 
   render() {
+    const { general } = this.props;
     return(
-      <div className="content">
+      <div className={`content  ${(general.darkMode) ? 'darkMode' : ''} `} >
         <div className="container text-center" style={{margin: 'auto'}}>
           <div style={{'marginTop': '0px'}}>
             <PokeRouter />
@@ -21,4 +24,10 @@ class PokeApp extends PureComponent {
   }
 }
 
-export default connect(null, { fetchPokemon })(PokeApp);
+const mapStateToProps = ({ general }) => {
+  return {
+    general
+  }
+}
+
+export default connect(mapStateToProps, { fetchPokemon })(PokeApp);

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PokeCard from './PokeCard';
 
 
-const CardWrapper = withRouter(({pokemon, history, ...props}) => {
+const CardWrapper = withRouter(({pokemon, history, darkMode, ...props}) => {
  
   const handleClick = () => {
     history.push(`/pokemons/${pokemon.id}`);
@@ -17,6 +17,7 @@ const CardWrapper = withRouter(({pokemon, history, ...props}) => {
           pokemon={pokemon}
           pokeTypes={false}
           pokeAnimated={false}
+          darkMode={darkMode}
         />
       </div>
     </Fragment>
