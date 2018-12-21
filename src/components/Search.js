@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent} from 'react';
+import React, {Fragment, PureComponent, createRef} from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import './styles/Search.css';
@@ -9,11 +9,21 @@ class Search extends PureComponent {
 
   state = {
     searchQuery: this.props.searchTerm,
+    textInput: createRef()
   };
 
-  handleChange = (e) => {
-    console.log('pokemons ', this.props.fetchedPokemon);
+  componentDidMount() {
+    this.focus();
+  }
 
+  focus = () => {
+    console.log('got in focus');
+    if (this.state.searchQuery.length > 0) {
+      this.state.textInput.current.focus();
+    }
+  }
+
+  handleChange = (e) => {
     const value  = e.target.value;
 
     this.setState({searchQuery: value});
@@ -36,7 +46,14 @@ class Search extends PureComponent {
           <Col xs="3"></Col>
           <Col xs="3" style={{textAlign: "center", marginLeft: "-1.4%"}}>
             <div className="search-div align-middle" >
-              <input type="search" placeholder="Search..." value={this.state.searchQuery} onChange={this.handleChange} />
+              <input 
+                type="search" 
+                placeholder="Search..." 
+                value={this.state.searchQuery} 
+                onChange={this.handleChange} 
+                ref={this.state.textInput}
+                onBlur={() => this.focus}
+                />
             </div>
           </Col>
           <Col xs="5" style={{marginTop:"4px", marginLeft:"5.8%"}}>

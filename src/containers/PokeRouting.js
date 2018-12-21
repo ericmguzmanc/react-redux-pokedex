@@ -5,7 +5,6 @@ import NotFound from '../components/NotFound';
 import withSuspense from '../components/withSuspense';
 
 const PokeList = withSuspense(import('../components/PokeList'));
-// const PokeDetail = withSuspense(import('../components/PokeDetail'));
 
 const PokeRouter = () => (
   <Router>

@@ -13,7 +13,6 @@ import {
 import { reducePokeList, doPokeQuery } from '../../utils/functons/reduce-pokeObjects';
 import { nextPage } from '../../utils/functons/pages';
 import PokeService from '../../utils/services/poke-service';
-import { debounce } from 'lodash';
 
 export function receivePokemon(data) {
   return {

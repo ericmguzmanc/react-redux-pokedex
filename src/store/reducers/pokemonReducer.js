@@ -52,7 +52,6 @@ export function pokemons(
         page: page,
       };
     case SEARCH_POKEMON_QUERY:
-    // const { pokemon } = action.payload;
       return {
         fetchedPokemon: state.fetchedPokemon,
         pokemons: [...action.payload],
