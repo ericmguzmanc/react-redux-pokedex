@@ -39,25 +39,25 @@ class PokeDetails extends PureComponent {
         <Animated animationIn="fadeIn" animationOut="fadeOut">
           <ShowWhenReady isLoading={isLoading}>
             <Row className="detail-main-content-row">
-              <Col sm="1" className="text-left">
+              <Col xl="1" className="text-left">
                 <div style={{marginTop: "5px"}}>
                   <Button outline={darkMode} color="secondary" className="back-btn" style={backBtnStyle} onClick={this.handleBackClick}>
                     <FontAwesomeIcon icon={faArrowLeft}/>
                   </Button>
                 </div>
               </Col>
-                <Col sm="4" style={{marginLeft: "0px"}}>
-                  <div style={{marginTop: "5px"}}>
-                    <PokeCard 
-                      isLoading={isLoading}
-                      pokemon={selectedPokemon}
-                      pokeTypes={true}
-                      pokeAnimated={true}
-                      />
-                  </div>
-                </Col>
+              <Col xl="4" style={{marginLeft: "0px"}} className="text-center">
+                <div style={{marginTop: "5px"}}>
+                  <PokeCard 
+                    isLoading={isLoading}
+                    pokemon={selectedPokemon}
+                    pokeTypes={true}
+                    pokeAnimated={true}
+                    />
+                </div>
+              </Col>
               
-              <Col sm="7">
+              <Col xl="7">
                 <div style={{ marginTop: "5px" }}>
                   <PokeInfo 
                     isLoading={isLoading}

@@ -57,10 +57,11 @@ const PokeInfo = ({isLoading, pokemon : { flavor_text, height, weight, stats }, 
 
 const renderPokeStats = ( stats, index ) => {
   const {stat: { name }, base_stat } = stats;
+
   return (
     <Row style={{marginBottom:"10px"}} key={index}>
-      <Col xs="3" className="progress-title" style={statTitlesStyles}>{firstCharToUpperCase(name)}</Col>
-      <Col xs="9">
+      <Col xs="5" sm="5" mg="4" xl="3" className="progress-title" style={statTitlesStyles}>{firstCharToUpperCase(name)}</Col>
+      <Col xs="7" sm="7" mg="8" xl="9" >
         <Progress barClassName={`${name}-stat`} value={base_stat} max={getPokeStatsLimit(name)}>{base_stat}</Progress>
       </Col>
     </Row>  
