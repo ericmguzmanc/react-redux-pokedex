@@ -17,7 +17,6 @@ class Search extends PureComponent {
   }
 
   focus = () => {
-    console.log('got in focus');
     if (this.state.searchQuery.length > 0) {
       this.state.textInput.current.focus();
     }
